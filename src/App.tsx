@@ -19,9 +19,6 @@ function App() {
           setResponse(result.message);
           console.log(result.message);
         },
-        // Note: it's importa
-// instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true);
           setError(error);
