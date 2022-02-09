@@ -24,3 +24,16 @@ var pop_of_parks={
     "Olympic": 6, //2,499,177
     "Yellowstone": 9 //3,806,306
 }
+//0 is little stars 9 is a lot of stars
+var stars_of_parks={
+    "Acadia": 8, //2,669,00
+    "Carlsbad Cavern":0, //185,835
+    "Denali": 9, //54,850
+    "Everglades": 7, // 792,319
+    "Glacier": 3, //1,698,864
+    "Grand Canyon": 6, //2,897,098
+    "Joshua Tree": 5, //2,399,542
+    "Mesa Verde": 2, //287,477
+    "Olympic": 1, //2,499,177
+    "Yellowstone": 4 //3,806,306
+}
