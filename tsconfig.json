@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "engine/parkData.js", "engine/scripts"  ]
 }
