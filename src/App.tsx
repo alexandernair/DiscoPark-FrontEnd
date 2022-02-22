@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-
-import getRankings from "./engine/matchmaking";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Matchmaking from "./pages/Matchmaking";
+import Results from "./pages/Results";
 
 function App() {
-  let rankings = getRankings({ temp: 4, population: 9, stars: 7 });
-
-  return <div>{rankings[0].park.name}</div>;
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Matchmaking />} />
+          </Route>
+          <Route path="/results">
+            <Route index element={<Results />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
