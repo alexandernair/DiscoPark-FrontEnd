@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MatchmakingSlider from "../components/MatchmakingSlider";
 import getRankings from "../engine/matchmaking";
+import CurrentPosition from "../components/FindLocation";
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
@@ -83,7 +84,7 @@ function Matchmaking() {
         min={0}
         max={200}
       />
-
+      <CurrentPosition />
       <Button onClick={generateParkList}>Let's Find You a Park!</Button>
       <div>
         <p>{temp}</p>
