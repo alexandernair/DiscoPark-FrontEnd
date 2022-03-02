@@ -3,7 +3,7 @@ import {
   temp_of_parks,
   pop_of_parks,
   stars_of_parks,
-} from "./static/parkData";
+} from "./static/parkDataRankings";
 
 interface Preferences {
   temp: number;

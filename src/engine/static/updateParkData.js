@@ -22,22 +22,27 @@ async function getAllParks() {
         parks.push({
           name: park.fullName,
           code: park.parkCode,
+          location: [park.latitude, park.longitude],
+          description: park.description,
+          state: park.states,
+          parkWebsite: park.url,
+          weatherInfo: park.weatherInfo,
         });
       });
     });
   }
 
   // convert JSON object to a string
-  //   const data = JSON.stringify(parks);
+  const data = JSON.stringify(parks);
 
   // write file to disk
-  //   fs.writeFile("./parkNameToCode.json", data, "utf8", (err) => {
-  //     if (err) {
-  //       console.log(`Error writing file: ${err}`);
-  //     } else {
-  //       console.log(`File is written successfully!`);
-  //     }
-  //   });
+  fs.writeFile("./parkNameToCode.json", data, "utf8", (err) => {
+    if (err) {
+      console.log(`Error writing file: ${err}`);
+    } else {
+      console.log(`File is written successfully!`);
+    }
+  });
 }
 
 getAllParks();

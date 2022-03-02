@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import MatchmakingSlider from "../components/MatchmakingSlider";
+import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
 
 interface Preferences {
@@ -21,10 +22,6 @@ interface RankedPark {
   score: number;
 }
 
-interface ResultsInputState {
-  rankings: RankedPark[];
-}
-
 function Results() {
   const location = useLocation();
 
@@ -35,9 +32,7 @@ function Results() {
     <div>
       <ol>
         {rankings.map((rankedPark: RankedPark) => (
-          <li>
-            {rankedPark.park.name}: {rankedPark.score}
-          </li>
+          <ParkCard code={rankedPark.park.code} />
         ))}
       </ol>
     </div>

@@ -14,6 +14,9 @@ function App() {
           <Route path="/results">
             <Route index element={<Results />} />
           </Route>
+          <Route path="/parks:code">
+            <Route index element={<Results />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
