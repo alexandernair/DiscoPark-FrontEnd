@@ -5,10 +5,14 @@ import {
   stars_of_parks,
 } from "./static/parkDataRankings";
 
+import data from "../engine/static/parkData.json";
+
 interface Preferences {
   temp: number;
   population: number;
   stars: number;
+  longitude: number;
+  latitude: number;
 }
 interface Park {
   name: string;
@@ -18,6 +22,7 @@ interface RankedPark {
   park: Park;
   score: number;
 }
+function getDistance(longitude: number, latitude: number) {}
 
 function getRatings(prefs: Preferences): RankedPark[] {
   let rankings: RankedPark[] = [];

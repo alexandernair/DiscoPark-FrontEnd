@@ -22,19 +22,7 @@ const CurrentPosition = () => {
     );
   };
 
-  return (
-    <View>
-      <Button title="Get Current Position" onPress={getPosition} />
-      {error ? (
-        <Text>Error retrieving current position</Text>
-      ) : (
-        <>
-          <Text>Latitude: {position.latitude}</Text>
-          <Text>Longitude: {position.longitude}</Text>
-        </>
-      )}
-    </View>
-  );
+  return { getPosition };
 };
 
 export default CurrentPosition;

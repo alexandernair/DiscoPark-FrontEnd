@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Matchmaking from "./pages/Matchmaking";
 import Results from "./pages/Results";
+import ResultsPark from "./pages/ResultsPark";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             <Route index element={<Results />} />
           </Route>
           <Route path="/parks:code">
-            <Route index element={<Results />} />
+            <Route index element={<ResultsPark />} />
           </Route>
         </Routes>
       </BrowserRouter>
