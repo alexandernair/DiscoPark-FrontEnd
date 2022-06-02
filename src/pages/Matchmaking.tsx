@@ -3,11 +3,12 @@ import Grid from "@mui/material/Grid";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MatchmakingSlider from "../components/MatchmakingSlider";
 import getRankings from "../engine/matchmaking";
 import Geolocation from "@react-native-community/geolocation";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
@@ -19,12 +20,20 @@ function Matchmaking() {
     latitude: 0,
     longitude: 0,
   });
-
+  const [isLoading, setIsLoading] = useState(false) 
   const navigate = useNavigate();
 
   const updateTemp = (event: Event, newTemp: number | number[]) => {
     if (typeof newTemp == "number") setTemp(newTemp);
   };
+
+  const buttonHandler = () => {
+    setIsLoading(current => !current)
+  }
+
+  useEffect( () => {
+    console.log(isLoading);
+}, [isLoading]);
 
   const updateCrowdedness = (
     event: Event,
@@ -42,11 +51,13 @@ function Matchmaking() {
   const updateDistance = (event: Event, newDistance: number | number[]) => {
     if (typeof newDistance == "number") setDistance(newDistance);
   };
-
+  function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
   const valuetext = (text: number) => `${text}`;
-  const generateLocation = () => {
+  const generateLocation = ()=> {
     Geolocation.getCurrentPosition(
-      (pos) => {
+      (pos) => {          
         setError("");
         setnewPostion({
           latitude: pos.coords.latitude,
@@ -57,6 +68,7 @@ function Matchmaking() {
     );
   };
   const generateParkList = () => {
+  
     let rankings = getRankings({
       temp: temp,
       population: crowdedness,
@@ -68,8 +80,16 @@ function Matchmaking() {
     navigate("/results", { state: { rankings: rankings } });
   };
   function callTwoFunctions() {
-    generateLocation();
-    generateParkList();
+    (async () => { 
+      // Do something before delay
+      generateLocation();
+      buttonHandler();
+      navigate("/loading");
+      await delay(2000);
+
+      // Do something after
+      generateParkList()  })();
+    
   }
   return (
     <div>
