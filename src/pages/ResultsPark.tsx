@@ -8,35 +8,31 @@ import MatchmakingSlider from "../components/MatchmakingSlider";
 import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
 
-interface Preferences {
-  temp: number;
-  population: number;
-  stars: number;
-}
-interface Park {
-  name: string;
+import data from "../engine/static/parkData.json";
+
+
+interface ParkInfo {
   code: string;
-}
-interface RankedPark {
-  park: Park;
-  score: number;
 }
 
 function ResultsPark() {
   const location = useLocation();
 
-  const state = location.state as { rankings: RankedPark[] };
-  const rankings: RankedPark[] = state.rankings;
+  const statea = location.state as ParkInfo;
+  const {code} = statea;
+  const { name, description, state, parkWebsite, weatherInfo} = data.filter((park) => park.code === code)[0];
+
 
   return (
     <div>
-      <ol>
-        {rankings.map((rankedPark: RankedPark) => (
-          <ParkCard code={rankedPark.park.code} />
-        ))}
-      </ol>
+    <h1>{code}</h1>
+    <h1>{name}</h1>
+    <h1>{description}</h1>
+    <h1>{state}</h1>
+    <h1>{parkWebsite}</h1>
+    <h1>{weatherInfo}</h1>
     </div>
-  );
+  );    
 }
 
 export default ResultsPark;

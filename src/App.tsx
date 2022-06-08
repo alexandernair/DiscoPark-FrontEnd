@@ -6,6 +6,7 @@ import ResultsPark from "./pages/ResultsPark";
 import Loading from "./pages/loading";
 
 function App() {
+
   return (
     <div>
       <BrowserRouter>
@@ -19,7 +20,7 @@ function App() {
           <Route path ="/loading">
           <Route index element={<Loading />} />
           </Route>
-          <Route path="/parks:code">
+          <Route path='/park/:code'>
             <Route index element={<ResultsPark />} />
           </Route>
         </Routes>

@@ -17,23 +17,15 @@ function Matchmaking() {
   const [distance, setDistance] = useState(25);
   const [error, setError] = useState("");
   const [newPosition, setnewPostion] = useState({
+    loaded: false,
     latitude: 0,
     longitude: 0,
   });
-  const [isLoading, setIsLoading] = useState(false) 
   const navigate = useNavigate();
 
   const updateTemp = (event: Event, newTemp: number | number[]) => {
     if (typeof newTemp == "number") setTemp(newTemp);
   };
-
-  const buttonHandler = () => {
-    setIsLoading(current => !current)
-  }
-
-  useEffect( () => {
-    console.log(isLoading);
-}, [isLoading]);
 
   const updateCrowdedness = (
     event: Event,
@@ -60,6 +52,7 @@ function Matchmaking() {
       (pos) => {          
         setError("");
         setnewPostion({
+          loaded: true,
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
         });
@@ -83,8 +76,9 @@ function Matchmaking() {
     (async () => { 
       // Do something before delay
       generateLocation();
-      buttonHandler();
+      
       navigate("/loading");
+
       await delay(2000);
 
       // Do something after

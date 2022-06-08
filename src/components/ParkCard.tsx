@@ -9,16 +9,19 @@ import { useNavigate } from "react-router-dom";
 
 import data from "../engine/static/parkData.json";
 
+interface Park {
+  name: string;
+  code: string;
+}
+
 export default function ParkCard(props: { code: string }) {
   const code = props.code;
-  const { name, description } = data.filter((park) => park.code === code)[0];
+  const { name, description, parkWebsite } = data.filter((park) => park.code === code)[0];
 
   const navigate = useNavigate();
 
   const routeToParkInfo = () => {
-    navigate(`/park/${code}`);
-  };
-
+    window.open(parkWebsite, '_blank');  }
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
