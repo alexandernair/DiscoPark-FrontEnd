@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.4.3",
     "@react-native-community/geolocation": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.1",
@@ -12,11 +13,9 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.14",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
     "axios": "^0.26.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-native-web": "^0.17.6",
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.2"
@@ -46,6 +45,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
     "@types/react-native": "^0.66.16",
     "react-router-dom": "^6.2.1",
     "ts-node": "^10.5.0",

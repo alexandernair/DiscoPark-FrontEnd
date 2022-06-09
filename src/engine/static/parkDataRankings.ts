@@ -39,18 +39,29 @@ var pop_of_parks = [
   "yell", // 3,806,306
 ];
 
-// 0 is a lot of stars 9 is little stars
+// 0 is little of stars 9 is a lot stars
 var stars_of_parks = [
-  "dena",
-  "acad",
-  "ever",
-  "grca",
-  "jotr",
-  "yell",
-  "glac",
-  "meve",
-  "olym",
+  // "dena",
+  // "acad",
+  // "ever",
+  // "grca",
+  // "jotr",
+  // "yell",
+  // "glac",
+  // "meve",
+  // "olym",
+  // "cave",
   "cave",
+  "olym",
+  "meve",
+  "glac",
+  "yell",
+  "jotr",
+  "grca",
+  "ever",
+  "acad",
+  "dena",
+
 ];
 
 export { parks_to_id, temp_of_parks, pop_of_parks, stars_of_parks };

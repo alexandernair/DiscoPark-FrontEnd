@@ -10,12 +10,14 @@ import getRankings from "../engine/matchmaking";
 import Geolocation from "@react-native-community/geolocation";
 import { wait } from "@testing-library/user-event/dist/utils";
 import CurrentPosition from "../components/FindLocation";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
   const [crowdedness, setCrowdedness] = useState(5);
   const [starVisiblity, setStarVisiblity] = useState(5);
-  const [distance, setDistance] = useState(25);
+  const [distance, setDistance] = useState(5);
   const [error, setError] = useState("");
   const [newPosition, setnewPostion] = useState({
     latitude: 0,
@@ -65,6 +67,7 @@ function Matchmaking() {
       temp: temp,
       population: crowdedness,
       stars: starVisiblity,
+      distance: distance,
       longitude: newPosition.longitude,
       latitude: newPosition.latitude,
     });
@@ -97,19 +100,25 @@ function Matchmaking() {
         <Grid item xs={6}>
           <MatchmakingSlider
             title="Temperature"
+            leftPicture="LocationOnIcon"
+            rightPicture = "LocationOnIcon"
             valueTextFunction={valuetext}
             updateFunction={updateTemp}
           />
         </Grid>
         <Grid item xs={6}>
           <MatchmakingSlider
-            title="Crowdedness"
+            title="Social Activites"
+            leftPicture= "LocationOnIcon"
+            rightPicture = "LocationOnIcon"
             valueTextFunction={valuetext}
             updateFunction={updateCrowdedness}
           />
         </Grid>
         <Grid item xs={6}>
           <MatchmakingSlider
+          leftPicture= "LocationOnIcon"
+          rightPicture = "LocationOnIcon"
             title="Star Visibility"
             valueTextFunction={valuetext}
             updateFunction={updateStarVisibility}
@@ -121,22 +130,19 @@ function Matchmaking() {
           </Typography>
           <Slider
             aria-label="distance"
-            defaultValue={100}
+            defaultValue={5}
             getAriaValueText={valuetext}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
             onChange={updateDistance}
-            step={20}
+            step={1}
             marks
             min={0}
-            max={200}
+            max={10}
           />
-        </Grid>
+          <Button onClick= {generateLocation}> Get Current Location <LocationOnIcon/></Button>
+        </Grid> 
       </Grid>
-      {/* <CurrentPosition/> */}
-      <Button onClick= {generateLocation}> Find location</Button>
-      <p>Latitude: {newPosition.latitude}</p>
-      <p>Longitude: {newPosition.longitude}</p>
-      <Button onClick={generateParkList}>Let's Find You a Park!</Button>
+      <Button size = "large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
       <div>
         <p>{temp}</p>
         <p>{crowdedness}</p>

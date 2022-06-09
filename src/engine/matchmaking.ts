@@ -13,6 +13,7 @@ interface Preferences {
   temp: number;
   population: number;
   stars: number;
+  distance: number;
   longitude: number;
   latitude: number;
 }
@@ -24,27 +25,66 @@ interface RankedPark {
   park: Park;
   score: number;
 }
-function GetDistance(latitude: number, longitude: number, code: string){
-  const [totalDistance, setTotalDistance] = useState(0);
-  const { location} = data.filter((park) => park.code === code)[0];
-  
-  setTotalDistance(Math.abs(parseFloat(location[0]) - latitude )
-  + Math.abs(parseFloat(location[1])- longitude));
 
-  return totalDistance;
-}
+
 
 
 function getRatings(prefs: Preferences): RankedPark[] {
+  let distanceMap = new Map<string, number>();
+
+
+  function GetDistance(latitude: number, longitude: number,  distance: number) :string[]{
+    Array.from(parks_to_id.keys()).map((code) => {
+
+      const { location} = data.filter((park) => park.code === code)[0];
+      let totalDistance = 0;
+      
+      totalDistance = (Math.abs(parseFloat(location[0]) - latitude )
+      + Math.abs(parseFloat(location[1])- longitude));
+      
+      distanceMap.set(code, totalDistance);
+
+
+    })
+    const mapSort2 = new Map([...distanceMap.entries()].sort((a, b) => a[1] - b[1]));
+
+    let distanceSortedString: string[] = [];
+    distanceSortedString = turnToArray(mapSort2);
+      return distanceSortedString;
+    }
+    
+  function turnToArray(map: Map<string,number>): string[] {
+    let arrayDistance:string[] = []
+    for (let key of map.keys()) {
+      arrayDistance.push(key);          
+  }
+    return arrayDistance;
+  }
+  
+
   let rankings: RankedPark[] = [];
+  let distanceSortedString2 = GetDistance(prefs.latitude, prefs.longitude, prefs.distance);;
+
+  
 
   Array.from(parks_to_id.keys()).map((code) => {
-    let score =
-      Math.abs(temp_of_parks.indexOf(code) - prefs.temp) +
-      pop_of_parks.indexOf(code) * prefs.population +
-      stars_of_parks.indexOf(code) * prefs.stars -
-      GetDistance(prefs.latitude, prefs.longitude, code);
 
+    console.log("Park: " + code + " | temperature: " + Math.abs(temp_of_parks.indexOf(code) - prefs.temp)* 2.5 );
+    console.log("Park: " + code + " | population: " + Math.abs(pop_of_parks.indexOf(code) - prefs.population)* 2.5 )
+    console.log("Park: " + code + " | stars: " +Math.abs(stars_of_parks.indexOf(code) - prefs.stars)* 2.5 );
+    console.log("Park: " + code + " | distance: " +Math.abs(distanceSortedString2.indexOf(code) - prefs.distance) * 2.5);
+
+
+    
+    let score =
+      Math.abs(temp_of_parks.indexOf(code) - prefs.temp) * 2.5 +
+      Math.abs(pop_of_parks.indexOf(code) - prefs.population) * 2.5 +
+      Math.abs(stars_of_parks.indexOf(code) - prefs.stars) * 2.5 + 
+      Math.abs(distanceSortedString2.indexOf(code) - prefs.distance) * 2.5;
+
+
+      
+    console.log("Park total score: " + score);
     return rankings.push({
       park: {
         name: parks_to_id.get(code)!,
