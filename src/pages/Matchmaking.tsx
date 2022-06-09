@@ -9,6 +9,7 @@ import MatchmakingSlider from "../components/MatchmakingSlider";
 import getRankings from "../engine/matchmaking";
 import Geolocation from "@react-native-community/geolocation";
 import { wait } from "@testing-library/user-event/dist/utils";
+import CurrentPosition from "../components/FindLocation";
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
@@ -17,7 +18,6 @@ function Matchmaking() {
   const [distance, setDistance] = useState(25);
   const [error, setError] = useState("");
   const [newPosition, setnewPostion] = useState({
-    loaded: false,
     latitude: 0,
     longitude: 0,
   });
@@ -43,16 +43,14 @@ function Matchmaking() {
   const updateDistance = (event: Event, newDistance: number | number[]) => {
     if (typeof newDistance == "number") setDistance(newDistance);
   };
-  function delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
+ 
   const valuetext = (text: number) => `${text}`;
+
   const generateLocation = ()=> {
     Geolocation.getCurrentPosition(
       (pos) => {          
         setError("");
         setnewPostion({
-          loaded: true,
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
         });
@@ -60,6 +58,7 @@ function Matchmaking() {
       (e) => setError(e.message)
     );
   };
+
   const generateParkList = () => {
   
     let rankings = getRankings({
@@ -72,19 +71,8 @@ function Matchmaking() {
 
     navigate("/results", { state: { rankings: rankings } });
   };
-  function callTwoFunctions() {
-    (async () => { 
-      // Do something before delay
-      generateLocation();
-      
-      navigate("/loading");
 
-      await delay(2000);
-
-      // Do something after
-      generateParkList()  })();
-    
-  }
+  
   return (
     <div>
       <Box
@@ -144,9 +132,11 @@ function Matchmaking() {
           />
         </Grid>
       </Grid>
-      <p>{newPosition.latitude}</p>
-      <p>{newPosition.longitude}</p>
-      <Button onClick={callTwoFunctions}>Let's Find You a Park!</Button>
+      {/* <CurrentPosition/> */}
+      <Button onClick= {generateLocation}> Find location</Button>
+      <p>Latitude: {newPosition.latitude}</p>
+      <p>Longitude: {newPosition.longitude}</p>
+      <Button onClick={generateParkList}>Let's Find You a Park!</Button>
       <div>
         <p>{temp}</p>
         <p>{crowdedness}</p>

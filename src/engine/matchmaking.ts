@@ -5,7 +5,9 @@ import {
   stars_of_parks,
 } from "./static/parkDataRankings";
 
+import React, { useState, useEffect } from "react";
 import data from "../engine/static/parkData.json";
+
 
 interface Preferences {
   temp: number;
@@ -22,7 +24,16 @@ interface RankedPark {
   park: Park;
   score: number;
 }
-function getDistance(longitude: number, latitude: number) {}
+function GetDistance(latitude: number, longitude: number, code: string){
+  const [totalDistance, setTotalDistance] = useState(0);
+  const { location} = data.filter((park) => park.code === code)[0];
+  
+  setTotalDistance(Math.abs(parseFloat(location[0]) - latitude )
+  + Math.abs(parseFloat(location[1])- longitude));
+
+  return totalDistance;
+}
+
 
 function getRatings(prefs: Preferences): RankedPark[] {
   let rankings: RankedPark[] = [];
@@ -31,7 +42,8 @@ function getRatings(prefs: Preferences): RankedPark[] {
     let score =
       Math.abs(temp_of_parks.indexOf(code) - prefs.temp) +
       pop_of_parks.indexOf(code) * prefs.population +
-      stars_of_parks.indexOf(code) * prefs.stars;
+      stars_of_parks.indexOf(code) * prefs.stars -
+      GetDistance(prefs.latitude, prefs.longitude, code);
 
     return rankings.push({
       park: {

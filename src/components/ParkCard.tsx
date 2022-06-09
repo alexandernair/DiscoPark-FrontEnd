@@ -18,7 +18,6 @@ export default function ParkCard(props: { code: string }) {
   const code = props.code;
   const { name, description, parkWebsite } = data.filter((park) => park.code === code)[0];
 
-  const navigate = useNavigate();
 
   const routeToParkInfo = () => {
     window.open(parkWebsite, '_blank');  }
