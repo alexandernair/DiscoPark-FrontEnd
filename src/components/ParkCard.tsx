@@ -26,7 +26,7 @@ export default function ParkCard(props: { code: string }) {
       <CardMedia
         component="img"
         height="140"
-        image={"https://mui.com/static/images/cards/contemplative-reptile.jpg"}
+        image={require('./Images/' + code + '.jpg')}
         alt={name}
       />
       <CardContent>

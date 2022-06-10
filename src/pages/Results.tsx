@@ -31,6 +31,15 @@ function Results() {
   return (
     <div>
       <ol>
+        <Grid spacing={3} columns={12} container justifyContent="center">
+          <Grid item xs={12} >
+            <h1>Your Top Park
+            </h1>
+          </Grid>
+          <Grid item xs={12}>
+            {<ParkCard code={rankings[0].park.code} />}
+          </Grid>
+        </Grid>
         {rankings.map((rankedPark: RankedPark) => (
           <ParkCard code={rankedPark.park.code} />
         ))}
