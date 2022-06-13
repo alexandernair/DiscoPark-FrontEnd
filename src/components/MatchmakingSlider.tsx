@@ -1,10 +1,16 @@
-import { Box, ComponentNameToClassKey, SvgIconTypeMap } from "@mui/material";
+import { Box, ComponentNameToClassKey, SvgIconTypeMap, ThemeProvider } from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
+import { createTheme } from '@mui/material/styles'
+
+
+
+
+
 
 type Component = React.FC<any> | React.LazyExoticComponent<React.FC<any>>
 
@@ -17,38 +23,50 @@ interface MatchmakingSliderProps {
 }
 
 function MatchmakingSlider(props: MatchmakingSliderProps) {
+  let sliderColor = createTheme({
+    palette: {
+      primary: {
+        main: '#AA7B08',
+      },
+      secondary: {
+        main: '#edf2ff',
+      },
+
+    },
+  });
   const { title, valueTextFunction, updateFunction } = props;
-
   return (
-    <div>  
-      <Grid sx= {{
-        
-      }}container spacing={3} columns={12}>      
-      <Grid  
-      container justifyContent = "flex-start"item xs={4}>
-        <props.leftPicture/>
-     </Grid>
-     <Grid  
-      container justifyContent = "center"item xs={4}>
-        <Typography id="input-slider" gutterBottom>
-        {title}
-      </Typography>     </Grid>
-      <Grid  
-     container justifyContent = "flex-end" item xs={4}>
-        <props.rightPicture />
-      </Grid>
-    </Grid>
+    <div>
+      <Grid sx={{
 
-      <Slider 
-        defaultValue={5}
-        getAriaValueText={valueTextFunction}
-        valueLabelDisplay="off"
-        onChange={updateFunction}
-        step={1}
-        marks
-        min={0}
-        max={10}
-      />
+      }} container spacing={3} columns={12}>
+        <Grid
+          container justifyContent="flex-start" item xs={4}>
+          <props.leftPicture />
+        </Grid>
+        <Grid
+          container justifyContent="center" item xs={4}>
+          <Typography id="input-slider" gutterBottom>
+            {title}
+          </Typography>     </Grid>
+        <Grid
+          container justifyContent="flex-end" item xs={4}>
+          <props.rightPicture />
+        </Grid>
+      </Grid>
+      <ThemeProvider theme={sliderColor}>
+        <Slider
+          defaultValue={5}
+          getAriaValueText={valueTextFunction}
+          valueLabelDisplay="off"
+          onChange={updateFunction}
+          step={1}
+          marks
+          min={0}
+          max={10}
+          color="primary"
+        />
+      </ThemeProvider>
     </div>
   );
 }

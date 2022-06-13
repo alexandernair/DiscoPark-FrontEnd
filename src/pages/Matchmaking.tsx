@@ -21,6 +21,8 @@ import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import { FavoriteBorder } from "@mui/icons-material";
 import Fab from "@mui/material/Fab";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
@@ -80,85 +82,95 @@ function Matchmaking() {
       longitude: newPosition.longitude,
       latitude: newPosition.latitude,
     });
-    
+
     navigate("/matched", { state: { rankings: rankings } });
   };
-
+  const themeLight = createTheme({
+    palette: {
+      background: {
+        default: "#D7ECC9"
+      }
+    }
+  });
 
   return (
     <div>
-      <Box
-        component="span"
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          justifyContent: "center",
-          bgcolor: "background.paper",
-          overflow: "hidden",
-          borderRadius: "12px",
-          boxShadow: 1,
-          fontWeight: "bold",
-          m: 4,
-        }}
-      >
-        <Typography variant="h3" component="h3">
-          Let's Find You a Park!
-        </Typography>
-      </Box>
-      <Grid container spacing={4} columns={12}>
-        <Grid sx={{
-          marginY: 4,
-        }} item xs={6}>
-          <MatchmakingSlider
-            title="Temperature"
-            leftPicture={AcUnitIcon}
-            rightPicture={LocalFireDepartmentIcon}
-            valueTextFunction={valuetext}
-            updateFunction={updateTemp}
-          />
-        </Grid>
-        <Grid sx={{
-          marginY: 4,
-        }} item xs={6}>
-          <MatchmakingSlider
-            title="Social Activites"
-            leftPicture={PersonIcon}
-            rightPicture={PeopleIcon}
-            valueTextFunction={valuetext}
-            updateFunction={updateCrowdedness}
-          />
-        </Grid>
-        <Grid sx={{
-          marginY: 4,
-        }} item xs={6}>
-          <MatchmakingSlider
-            leftPicture={NightsStayIcon}
-            rightPicture={AutoAwesomeIcon}
-            title="Star Visibility"
-            valueTextFunction={valuetext}
-            updateFunction={updateStarVisibility}
-          />
-        </Grid>
-        <Grid sx={{
-          marginY: 4,
-        }} item xs={6}>
-          <MatchmakingSlider
-            leftPicture={DirectionsCarFilledIcon}
-            rightPicture={AirplanemodeActiveIcon}
-            title="Distance"
-            valueTextFunction={valuetext}
-            updateFunction={updateDistance}
-          />
-          <Grid container justifyContent="center">
-            <Button onClick={generateLocation} aria-label="add"> Get Current Location <LocationOnIcon /></Button>
+      <ThemeProvider theme={themeLight}>
+        <CssBaseline />
+        <Box
+          component="span"
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "center",
+            bgcolor: "background.paper",
+            overflow: "hidden",
+            borderRadius: "12px",
+            boxShadow: 1,
+            fontWeight: "bold",
+            m: 4,
+          }}
+        >
+          <Typography variant="h3" component="h3">
+            Let's Find You a Park!
+          </Typography>
+        </Box>
+        <Grid container spacing={4} columns={12}>
+          <Grid sx={{
+            marginY: 4,
+          }} item xs={6}>
+            <MatchmakingSlider
+              title="Temperature"
+              leftPicture={AcUnitIcon}
+              rightPicture={LocalFireDepartmentIcon}
+              valueTextFunction={valuetext}
+              updateFunction={updateTemp}
+            />
+          </Grid>
+          <Grid sx={{
+            marginY: 4,
+          }} item xs={6}>
+            <MatchmakingSlider
+              title="Social Activites"
+              leftPicture={PersonIcon}
+              rightPicture={PeopleIcon}
+              valueTextFunction={valuetext}
+              updateFunction={updateCrowdedness}
+            />
+          </Grid>
+          <Grid sx={{
+            marginY: 4,
+          }} item xs={6}>
+            <MatchmakingSlider
+              leftPicture={NightsStayIcon}
+              rightPicture={AutoAwesomeIcon}
+              title="Star Visibility"
+              valueTextFunction={valuetext}
+              updateFunction={updateStarVisibility}
+            />
+          </Grid>
+          <Grid sx={{
+            marginY: 4,
+          }} item xs={6}>
+            <MatchmakingSlider
+              leftPicture={DirectionsCarFilledIcon}
+              rightPicture={AirplanemodeActiveIcon}
+              title="Distance"
+              valueTextFunction={valuetext}
+              updateFunction={updateDistance}
+            />
+            <Grid container justifyContent="center">
+              <Button onClick={generateLocation} aria-label="add"> Get Current Location <LocationOnIcon /></Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid sx={{
-        paddingTop: 20,
-      }} container justifyContent="center">
-        <Button size="large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
-      </Grid>
+        <Grid sx={{
+          paddingTop: 20,
+        }} container justifyContent="center">
+          <Button size="large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
+        </Grid>
+      </ThemeProvider>
+
     </div>
   );
 }
