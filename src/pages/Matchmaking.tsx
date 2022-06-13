@@ -54,12 +54,12 @@ function Matchmaking() {
   const updateDistance = (event: Event, newDistance: number | number[]) => {
     if (typeof newDistance == "number") setDistance(newDistance);
   };
- 
+
   const valuetext = (text: number) => `${text}`;
 
-  const generateLocation = ()=> {
+  const generateLocation = () => {
     Geolocation.getCurrentPosition(
-      (pos) => {          
+      (pos) => {
         setError("");
         setnewPostion({
           latitude: pos.coords.latitude,
@@ -71,7 +71,7 @@ function Matchmaking() {
   };
 
   const generateParkList = () => {
-  
+
     let rankings = getRankings({
       temp: temp,
       population: crowdedness,
@@ -80,11 +80,11 @@ function Matchmaking() {
       longitude: newPosition.longitude,
       latitude: newPosition.latitude,
     });
-
-    navigate("/results", { state: { rankings: rankings } });
+    
+    navigate("/matched", { state: { rankings: rankings } });
   };
 
-  
+
   return (
     <div>
       <Box
@@ -107,57 +107,57 @@ function Matchmaking() {
       </Box>
       <Grid container spacing={4} columns={12}>
         <Grid sx={{
-        marginY :4,
-      }} item xs={6}>
+          marginY: 4,
+        }} item xs={6}>
           <MatchmakingSlider
             title="Temperature"
-            leftPicture= {AcUnitIcon}
-            rightPicture = {LocalFireDepartmentIcon}
+            leftPicture={AcUnitIcon}
+            rightPicture={LocalFireDepartmentIcon}
             valueTextFunction={valuetext}
             updateFunction={updateTemp}
           />
         </Grid>
-        <Grid  sx={{
-        marginY :4,
-      }}item xs={6}>
+        <Grid sx={{
+          marginY: 4,
+        }} item xs={6}>
           <MatchmakingSlider
             title="Social Activites"
-            leftPicture= {PersonIcon}
-            rightPicture = {PeopleIcon}
+            leftPicture={PersonIcon}
+            rightPicture={PeopleIcon}
             valueTextFunction={valuetext}
             updateFunction={updateCrowdedness}
           />
         </Grid>
-        <Grid  sx={{
-        marginY :4,
-      }}item xs={6}>
+        <Grid sx={{
+          marginY: 4,
+        }} item xs={6}>
           <MatchmakingSlider
-          leftPicture= {NightsStayIcon}
-          rightPicture = {AutoAwesomeIcon}
+            leftPicture={NightsStayIcon}
+            rightPicture={AutoAwesomeIcon}
             title="Star Visibility"
             valueTextFunction={valuetext}
             updateFunction={updateStarVisibility}
           />
         </Grid>
-        <Grid  sx={{
-        marginY :4,
-      }}item xs={6}>
+        <Grid sx={{
+          marginY: 4,
+        }} item xs={6}>
           <MatchmakingSlider
-          leftPicture= {DirectionsCarFilledIcon}
-          rightPicture = {AirplanemodeActiveIcon}
+            leftPicture={DirectionsCarFilledIcon}
+            rightPicture={AirplanemodeActiveIcon}
             title="Distance"
             valueTextFunction={valuetext}
             updateFunction={updateDistance}
           />
-          <Grid container justifyContent= "center">
-         <Fab onClick= {generateLocation} variant="extended" size="small"  aria-label="add"> Get Current Location <LocationOnIcon/></Fab>
+          <Grid container justifyContent="center">
+            <Button onClick={generateLocation} aria-label="add"> Get Current Location <LocationOnIcon /></Button>
           </Grid>
         </Grid>
       </Grid>
       <Grid sx={{
         paddingTop: 20,
-      }}  container justifyContent="center">
-      <Button size = "large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
+      }} container justifyContent="center">
+        <Button size="large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
       </Grid>
     </div>
   );
