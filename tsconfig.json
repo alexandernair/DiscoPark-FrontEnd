@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "engine/parkData.js", "engine/scripts"  ]
+    "src",
+    "engine/parkData.js",
+    "engine/scripts"
+  ]
 }

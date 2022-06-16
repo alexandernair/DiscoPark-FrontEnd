@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MatchmakingSlider from "../components/MatchmakingSlider";
 import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
+import SliderParks from "../components/SliderParks";
 
 interface Preferences {
   temp: number;
@@ -30,13 +31,16 @@ function Results() {
 
   return (
     <div>
-      <ol>
+      <SliderParks
+        rankings={rankings}
+      />
+      {/* <ol>
         {rankings.slice(1)
-          .map((rankedPark: RankedPark) => ( 
+          .map((rankedPark: RankedPark) => (
             <ParkCard code={rankedPark.park.code} />
 
           ))}
-      </ol>
+      </ol> */}
 
     </div>
   );
