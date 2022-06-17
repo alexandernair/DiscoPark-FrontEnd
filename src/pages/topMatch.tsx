@@ -9,6 +9,7 @@ import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
 import IconButton from '@mui/material/IconButton';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import SliderParks from "../components/SliderParks";
 
 interface Preferences {
     temp: number;
@@ -55,6 +56,10 @@ function TopMatch() {
                             </IconButton>
                         </Grid>
                     </Grid>
+                    <SliderParks
+        rankings={rankings}
+                 />
+
 
                 </Grid>
 
