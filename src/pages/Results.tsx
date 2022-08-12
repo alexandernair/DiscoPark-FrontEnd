@@ -31,17 +31,17 @@ function Results() {
 
   return (
     <div>
-      <SliderParks
-        rankings={rankings}
-      />
-      {/* <ol>
-        {rankings.slice(1)
-          .map((rankedPark: RankedPark) => (
-            <ParkCard code={rankedPark.park.code} />
-
-          ))}
-      </ol> */}
-
+      <ol
+        style={{
+          display: "flex-wrap",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+      >
+        {rankings.slice(1).map((rankedPark: RankedPark) => (
+          <ParkCard code={rankedPark.park.code} />
+        ))}
+      </ol>
     </div>
   );
 }

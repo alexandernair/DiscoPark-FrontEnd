@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import React, { useState, useEffect } from "react";
@@ -10,19 +9,21 @@ import getRankings from "../engine/matchmaking";
 import Geolocation from "@react-native-community/geolocation";
 import { wait } from "@testing-library/user-event/dist/utils";
 import CurrentPosition from "../components/FindLocation";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PersonIcon from '@mui/icons-material/Person';
-import PeopleIcon from '@mui/icons-material/People';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import NightsStayIcon from '@mui/icons-material/NightsStay';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
-import { FavoriteBorder } from "@mui/icons-material";
-import Fab from "@mui/material/Fab";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PersonIcon from "@mui/icons-material/Person";
+import PeopleIcon from "@mui/icons-material/People";
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import NightsStayIcon from "@mui/icons-material/NightsStay";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import { themeLight, fontTheme } from "../components/theme";
+import discoPark from "../components/Images/DiscoPark-1.png";
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu" />;
 
 function Matchmaking() {
   const [temp, setTemp] = useState(5);
@@ -73,7 +74,6 @@ function Matchmaking() {
   };
 
   const generateParkList = () => {
-
     let rankings = getRankings({
       temp: temp,
       population: crowdedness,
@@ -85,40 +85,43 @@ function Matchmaking() {
 
     navigate("/matched", { state: { rankings: rankings } });
   };
-  const themeLight = createTheme({
-    palette: {
-      background: {
-        default: "#D7ECC9"
-      }
-    }
-  });
 
   return (
     <div>
       <ThemeProvider theme={themeLight}>
         <CssBaseline />
-        <Box
-          component="span"
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: "center",
-            bgcolor: "background.paper",
-            overflow: "hidden",
-            borderRadius: "12px",
-            boxShadow: 1,
-            fontWeight: "bold",
-            m: 4,
-          }}
-        >
-          <Typography variant="h3" component="h3">
-            Let's Find You a Park!
-          </Typography>
-        </Box>
-        <Grid container spacing={4} columns={12}>
-          <Grid sx={{
-            marginY: 4,
-          }} item xs={6}>
+        <Grid container spacing={2}>
+          <Grid xs={4}></Grid>
+          <Grid
+            item
+            container
+            xs={4}
+            justifyContent="center"
+            alignItems="flex-end"
+          >
+            <Typography variant="h3" component="h3" color="white">
+              Welcome to Disco Park!
+            </Typography>
+          </Grid>
+          <Grid item xs={4} alignItems="flex-end">
+            <img width={250} height={250} alt="racoon disco" src={discoPark} />
+          </Grid>
+          <Grid xs={4}></Grid>
+          <Grid item container xs={4} justifyContent="center">
+            <Typography color="white">
+              Finding your top National Park made easy.
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={8} columns={12}>
+          <Grid
+            sx={{
+              marginY: 4,
+            }}
+            item
+            xs={6}
+          >
             <MatchmakingSlider
               title="Temperature"
               leftPicture={AcUnitIcon}
@@ -127,9 +130,13 @@ function Matchmaking() {
               updateFunction={updateTemp}
             />
           </Grid>
-          <Grid sx={{
-            marginY: 4,
-          }} item xs={6}>
+          <Grid
+            sx={{
+              marginY: 4,
+            }}
+            item
+            xs={6}
+          >
             <MatchmakingSlider
               title="Social Activites"
               leftPicture={PersonIcon}
@@ -138,9 +145,13 @@ function Matchmaking() {
               updateFunction={updateCrowdedness}
             />
           </Grid>
-          <Grid sx={{
-            marginY: 4,
-          }} item xs={6}>
+          <Grid
+            sx={{
+              marginY: 4,
+            }}
+            item
+            xs={6}
+          >
             <MatchmakingSlider
               leftPicture={NightsStayIcon}
               rightPicture={AutoAwesomeIcon}
@@ -149,9 +160,13 @@ function Matchmaking() {
               updateFunction={updateStarVisibility}
             />
           </Grid>
-          <Grid sx={{
-            marginY: 4,
-          }} item xs={6}>
+          <Grid
+            sx={{
+              marginY: 4,
+            }}
+            item
+            xs={6}
+          >
             <MatchmakingSlider
               leftPicture={DirectionsCarFilledIcon}
               rightPicture={AirplanemodeActiveIcon}
@@ -160,17 +175,25 @@ function Matchmaking() {
               updateFunction={updateDistance}
             />
             <Grid container justifyContent="center">
-              <Button onClick={generateLocation} aria-label="add"> Get Current Location <LocationOnIcon /></Button>
+              <Button onClick={generateLocation} aria-label="add">
+                {" "}
+                Get Current Location <LocationOnIcon />
+              </Button>
             </Grid>
           </Grid>
         </Grid>
-        <Grid sx={{
-          paddingTop: 20,
-        }} container justifyContent="center">
-          <Button size="large" variant="contained" onClick={generateParkList}>Let's Go!</Button>
+        <Grid
+          sx={{
+            paddingTop: 6,
+          }}
+          container
+          justifyContent="center"
+        >
+          <Button size="large" variant="contained" onClick={generateParkList}>
+            Let's Go!
+          </Button>
         </Grid>
       </ThemeProvider>
-
     </div>
   );
 }
