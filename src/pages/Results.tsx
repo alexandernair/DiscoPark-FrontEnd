@@ -8,12 +8,10 @@ import MatchmakingSlider from "../components/MatchmakingSlider";
 import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
 import SliderParks from "../components/SliderParks";
+import { List, ThemeProvider } from "@mui/material";
+import { backgroundColor } from "../components/theme";
+import { CssBaseline } from "@mui/material";
 
-interface Preferences {
-  temp: number;
-  population: number;
-  stars: number;
-}
 interface Park {
   name: string;
   code: string;
@@ -31,17 +29,16 @@ function Results() {
 
   return (
     <div>
-      <ol
-        style={{
-          display: "flex-wrap",
-          flexDirection: "row",
-          flexWrap: "wrap",
-        }}
-      >
-        {rankings.slice(1).map((rankedPark: RankedPark) => (
-          <ParkCard code={rankedPark.park.code} />
-        ))}
-      </ol>
+      <ThemeProvider theme={backgroundColor}>
+        <CssBaseline />
+        <Grid container>
+          {rankings.slice(1).map((rankedPark: RankedPark) => (
+            <Grid item xs={3}>
+              <ParkCard code={rankedPark.park.code} />
+            </Grid>
+          ))}
+        </Grid>
+      </ThemeProvider>
     </div>
   );
 }

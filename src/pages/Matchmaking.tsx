@@ -1,14 +1,12 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MatchmakingSlider from "../components/MatchmakingSlider";
 import getRankings from "../engine/matchmaking";
 import Geolocation from "@react-native-community/geolocation";
 import { wait } from "@testing-library/user-event/dist/utils";
-import CurrentPosition from "../components/FindLocation";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
@@ -18,9 +16,9 @@ import NightsStayIcon from "@mui/icons-material/NightsStay";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { themeLight, fontTheme } from "../components/theme";
+import { backgroundColor } from "../components/theme";
 import discoPark from "../components/Images/DiscoPark-1.png";
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu" />;
@@ -88,7 +86,7 @@ function Matchmaking() {
 
   return (
     <div>
-      <ThemeProvider theme={themeLight}>
+      <ThemeProvider theme={backgroundColor}>
         <CssBaseline />
         <Grid container spacing={2}>
           <Grid xs={4}></Grid>

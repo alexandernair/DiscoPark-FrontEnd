@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, makeStyles } from "@mui/material/styles";
 
 const fontTheme = createTheme({
   typography: {
@@ -23,12 +23,19 @@ const sliderColor = createTheme({
     },
   },
 });
-const themeLight = createTheme({
+const backgroundColor = createTheme({
   palette: {
     background: {
       default: "#1E362D",
     },
   },
 });
+const whiteButton = createTheme({
+  palette: {
+    secondary: {
+      main: "#FFFFFF",
+    },
+  },
+});
 
-export { fontTheme, headerTheme, themeLight, sliderColor };
+export { fontTheme, headerTheme, backgroundColor, sliderColor, whiteButton };

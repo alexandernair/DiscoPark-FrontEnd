@@ -16,17 +16,28 @@ interface Park {
 
 export default function ParkCard(props: { code: string }) {
   const code = props.code;
-  const { name, description, parkWebsite } = data.filter((park) => park.code === code)[0];
-
+  const { name, description, parkWebsite } = data.filter(
+    (park) => park.code === code
+  )[0];
 
   const routeToParkInfo = () => {
-    window.open(parkWebsite, '_blank');  }
+    window.open(parkWebsite, "_blank");
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: 5,
+        ":hover": {
+          boxShadow: 20,
+        },
+      }}
+    >
       <CardMedia
         component="img"
         height="140"
-        image={require('./Images/' + code + '.jpg')}
+        image={require("./Images/" + code + ".jpg")}
         alt={name}
       />
       <CardContent>

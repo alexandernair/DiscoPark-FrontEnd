@@ -9,13 +9,10 @@ import ParkCard from "../components/ParkCard";
 import getRankings from "../engine/matchmaking";
 import IconButton from "@mui/material/IconButton";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import SliderParks from "../components/SliderParks";
+import { backgroundColor, whiteButton } from "../components/theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import Sparkles from "react-sparkle";
 
-interface Preferences {
-  temp: number;
-  population: number;
-  stars: number;
-}
 interface Park {
   name: string;
   code: string;
@@ -37,33 +34,56 @@ function TopMatch() {
   };
   return (
     <div>
-      <Grid sx={{}} columns={16}>
-        <Grid container justifyContent="center" item xs={16}>
-          <h1>Your Top Park</h1>
-        </Grid>
-        <Grid container justifyContent="center" item xs={16}>
-          {<ParkCard code={rankings[0].park.code} />}
-          <Grid
-            sx={{
-              marginY: 4,
-            }}
-            container
-            justifyContent="center"
-          >
+      <ThemeProvider theme={backgroundColor}>
+        <CssBaseline />
+        <Grid sx={{}} columns={16}>
+          <Grid container justifyContent="center" item xs={16}>
             <Typography
-              sx={{
-                marginY: 2,
-              }}
-              variant="h6"
+              sx={{ marginY: 5 }}
+              variant="h3"
+              component="h3"
+              color="white"
             >
-              View your other top picks!
+              Your Top Park
             </Typography>
-            <IconButton onClick={generateParkList} size="large">
-              <ArrowCircleRightIcon fontSize="large" />
-            </IconButton>
+          </Grid>
+
+          <Grid container justifyContent="center" item xs={16}>
+            {<ParkCard code={rankings[0].park.code} />}
+            <Sparkles
+              color="yellow"
+              count={15}
+              minSize={7}
+              maxSize={12}
+              overflowPx={80}
+              fadeOutSpeed={15}
+              flicker={false}
+            />
+            <Grid
+              sx={{
+                marginY: 4,
+              }}
+              container
+              justifyContent="center"
+            >
+              <Typography
+                sx={{
+                  marginY: 2,
+                }}
+                variant="h6"
+                color="white"
+              >
+                View your other top picks!
+              </Typography>
+              <ThemeProvider theme={whiteButton}>
+                <IconButton onClick={generateParkList} size="large">
+                  <ArrowCircleRightIcon fontSize="large" color="secondary" />
+                </IconButton>
+              </ThemeProvider>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </div>
   );
 }
