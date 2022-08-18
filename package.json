@@ -21,7 +21,6 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-native-web": "^0.17.6",
     "react-scripts": "5.0.0",
-    "react-sparkle": "^1.0.9",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

@@ -11,7 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { backgroundColor, whiteButton } from "../components/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Sparkles from "react-sparkle";
 
 interface Park {
   name: string;
@@ -50,15 +49,7 @@ function TopMatch() {
 
           <Grid container justifyContent="center" item xs={16}>
             {<ParkCard code={rankings[0].park.code} />}
-            <Sparkles
-              color="yellow"
-              count={15}
-              minSize={7}
-              maxSize={12}
-              overflowPx={80}
-              fadeOutSpeed={15}
-              flicker={false}
-            />
+
             <Grid
               sx={{
                 marginY: 4,
